@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Backpacker</string>
+
+    <string name="btn_prepare_list_text">Prepare List</string>
+    <string name="btn_pack_text">Pack a Backpack</string>
+    <string name="btn_info_text">Info</string>
+    <string name="btn_add_category_text">Add category</string>
+    <string name="btn_add_item_text">Add item</string>
+
+    <string name="btn_create_item_text">Create item</string>
+    <string name="btn_create_category_text">Create category</string>
+
+    <string name="title_choose_category">Choose category</string>
+    <string name="title_choose_item">Choose item</string>
+    <string name="title_input_new_category">Input new category</string>
+    <string name="title_input_new_item">Input new item</string>
+
+    <string name="toast_empty_name">Empty name!</string>
+</resources>

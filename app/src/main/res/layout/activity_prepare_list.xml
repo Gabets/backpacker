@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.blessedtactics.programs.backpacker.PrepareListActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAddCategory"
+            style="@style/SmallButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onClickAddCategory"
+            android:text="@string/btn_add_category_text" />
+
+        <Button
+            android:id="@+id/btnAddItem"
+            style="@style/SmallButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onClickAddItem"
+            android:text="@string/btn_add_item_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCreateCategory"
+            style="@style/SmallButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onClickCreateCategory"
+            android:text="@string/btn_create_category_text" />
+
+        <Button
+            android:id="@+id/btnCreateItem"
+            style="@style/SmallButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onClickCreateItem"
+            android:text="@string/btn_create_item_text" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvPrepareList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
