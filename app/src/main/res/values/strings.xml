@@ -16,4 +16,90 @@
     <string name="title_input_new_item">Input new item</string>
 
     <string name="toast_empty_name">Empty name!</string>
+
+    <string name="category_instruments">Instruments</string>
+    <string name="saw">saw</string>
+    <string name="adhesive_tape">adhesive tape</string>
+    <string name="machete">machete</string>
+    <string name="multitool">multitool</string>
+    <string name="water_filter">personal water filter</string>
+    <string name="hatchet">hatchet</string>
+
+    <string name="category_others">Others</string>
+    <string name="hammock">hammock</string>
+    <string name="map_case">map case</string>
+    <string name="flask_with_strong_drink">flask with strong drink</string>
+    <string name="rope">rope</string>
+    <string name="bottle_of_water">bottle of water</string>
+    <string name="water_flask">water flask</string>
+    <string name="book">book</string>
+    <string name="first_aid_kit">first aid kit</string>
+    <string name="needle_and_cotton">needle and cotton</string>
+    <string name="pocket_mirror">pocket mirror</string>
+    <string name="repellent">repellent</string>
+    <string name="binoculars">binoculars</string>
+    <string name="map">map</string>
+    <string name="passport">passport</string>
+    <string name="spare_batteries">spare_batteries</string>
+    <string name="GPS">GPS</string>
+    <string name="trekking_poles">trekking poles</string>
+    <string name="pistol">pistol</string>
+    <string name="keys">keys</string>
+    <string name="wallet">wallet</string>
+    <string name="phone">phone</string>
+    <string name="lighter">lighter</string>
+    <string name="compass">compass</string>
+    <string name="the_tablet">the tablet</string>
+
+    <string name="category_for_camping">For Camping</string>
+    <string name="mat">mat</string>
+    <string name="sleeping_bag">sleeping bag</string>
+    <string name="tent">tent</string>
+    <string name="canopy">canopy</string>
+    <string name="toilet_paper">toilet paper</string>
+    <string name="kindling">kindling</string>
+    <string name="dry_fuel">dry fuel</string>
+    <string name="matches">matches</string>
+    <string name="sit_mat">sit mat</string>
+    <string name="flashlight">flashlight</string>
+    <string name="e_reader">e-reader</string>
+
+    <string name="category_clothing">Clothing</string>
+    <string name="spare_socks">spare socks</string>
+    <string name="warm_socks">warm socks</string>
+    <string name="warm_hat">warm hat</string>
+    <string name="poncho">poncho</string>
+    <string name="gloves">gloves</string>
+
+    <string name="category_for_washing">For washing</string>
+    <string name="towel">towel</string>
+    <string name="soap">soap</string>
+    <string name="wet_wipes">wet wipes</string>
+    <string name="toothpaste">toothpaste</string>
+    <string name="toothbrush">toothbrush</string>
+    <string name="dental_floss">dental_floss</string>
+
+    <string name="category_dishes">Dishes</string>
+    <string name="pan">pan</string>
+    <string name="mug">mug</string>
+    <string name="bowl">bowl</string>
+    <string name="thermos">thermos</string>
+    <string name="spoon">spoon</string>
+    <string name="knife">knife</string>
+
+    <string name="category_food">Food</string>
+    <string name="chewing_gum">chewing gum</string>
+    <string name="bread">bread</string>
+    <string name="vegetables">vegetables</string>
+    <string name="soup">soup</string>
+    <string name="meat">meat</string>
+    <string name="tea">tea</string>
+    <string name="snacks">snacks</string>
+    <string name="sugar">sugar</string>
+    <string name="salt">salt</string>
+    <string name="MRE">MRE</string>
+
+    <string name="category_fun">Fun</string>
+    <string name="cards">cards</string>
+    <string name="board_game">board game</string>
 </resources>
