@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Упаковщик</string>
+
+    <string name="btn_prepare_list_text">Подготовить список</string>
+    <string name="btn_pack_text">Собрать рюкзак</string>
+    <string name="btn_info_text">Информация</string>
+    <string name="btn_add_category_text">Добавить категорию</string>
+    <string name="btn_add_item_text">Добавить предмет</string>
+
+    <string name="btn_create_item_text">Создать предмет</string>
+    <string name="btn_create_category_text">Создать категорию</string>
+
+    <string name="title_choose_category">Выберите категорию</string>
+    <string name="title_choose_item">Выберите предмет</string>
+    <string name="title_input_new_category">Введите название категории</string>
+    <string name="title_input_new_item">Введите название предмета</string>
+
+    <string name="toast_empty_name">Пустое название!</string>
+
+    <string name="category_instruments">Инструменты</string>
+    <string name="saw">пила</string>
+    <string name="adhesive_tape">изолента</string>
+    <string name="machete">мачете</string>
+    <string name="multitool">мультитул</string>
+    <string name="water_filter">фильтр</string>
+    <string name="hatchet">топорик</string>
+
+    <string name="category_others">Разное</string>
+    <string name="hammock">гамак</string>
+    <string name="map_case">планшет для карты</string>
+    <string name="flask_with_strong_drink">фляжка с крепким алкоголем</string>
+    <string name="rope">верёвка</string>
+    <string name="bottle_of_water">бутылка с водой</string>
+    <string name="water_flask">фляжка с водой</string>
+    <string name="book">книга</string>
+    <string name="first_aid_kit">аптечка</string>
+    <string name="needle_and_cotton">нитка с иголкой</string>
+    <string name="pocket_mirror">зеркальце</string>
+    <string name="repellent">репеллент</string>
+    <string name="binoculars">бинокль</string>
+    <string name="map">карта</string>
+    <string name="passport">паспорт</string>
+    <string name="spare_batteries">запсные батарейки</string>
+    <string name="GPS">GPS</string>
+    <string name="trekking_poles">трекинговые палки</string>
+    <string name="pistol">пистолет</string>
+    <string name="keys">ключи</string>
+    <string name="wallet">кошелёк</string>
+    <string name="phone">телефон</string>
+    <string name="lighter">зажигалка</string>
+    <string name="compass">компас</string>
+    <string name="the_tablet">планшет</string>
+
+    <string name="category_for_camping">Для Стоянки</string>
+    <string name="mat">коврик</string>
+    <string name="sleeping_bag">спальник</string>
+    <string name="tent">палатка</string>
+    <string name="canopy">палатка</string>
+    <string name="toilet_paper">туалетная бумага</string>
+    <string name="kindling">растопка</string>
+    <string name="dry_fuel">сухое топливо</string>
+    <string name="matches">спички</string>
+    <string name="sit_mat">сидушка</string>
+    <string name="flashlight">фонарик</string>
+    <string name="e_reader">читалка</string>
+
+    <string name="category_clothing">Одежда</string>
+    <string name="spare_socks">запасные носки</string>
+    <string name="warm_socks">тёплые носки</string>
+    <string name="warm_hat">тёплая шапка</string>
+    <string name="poncho">пончо</string>
+    <string name="gloves">перчатки</string>
+
+    <string name="category_for_washing">Для умывания</string>
+    <string name="towel">полотенце</string>
+    <string name="soap">мыло</string>
+    <string name="wet_wipes">влажные салфетки</string>
+    <string name="toothpaste">зубная паста</string>
+    <string name="toothbrush">зубная щётка</string>
+    <string name="dental_floss">зубная нить</string>
+
+    <string name="category_dishes">Посуда</string>
+    <string name="pan">кастрюля</string>
+    <string name="mug">кружка</string>
+    <string name="bowl">миска</string>
+    <string name="thermos">термос</string>
+    <string name="spoon">ложка</string>
+    <string name="knife">нож</string>
+
+    <string name="category_food">Еда</string>
+    <string name="chewing_gum">жвачка</string>
+    <string name="bread">хлеб</string>
+    <string name="vegetables">овощи</string>
+    <string name="soup">суп</string>
+    <string name="meat">мясо</string>
+    <string name="tea">чай</string>
+    <string name="snacks">вкусняшки</string>
+    <string name="sugar">сахар</string>
+    <string name="salt">соль</string>
+    <string name="MRE">сухпаёк</string>
+
+    <string name="category_fun">Развлечения</string>
+    <string name="cards">карты</string>
+    <string name="board_game">настолка</string>
+</resources>
