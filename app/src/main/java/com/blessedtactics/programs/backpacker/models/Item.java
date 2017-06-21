@@ -1,23 +1,27 @@
 package com.blessedtactics.programs.backpacker.models;
 
 
-public class Item {
-    private String mName;
-    private char mType;
+import io.realm.RealmObject;
+import io.realm.annotations.Required;
 
-    public Item() {}
-
-    public Item(String name, char type) {
-        mName = name;
-        mType = type;
-    }
+public class Item  extends RealmObject {
+    @Required
+    private String name;
+    private String type;
 
     public String getName() {
-        return mName;
+        return name;
     }
 
-    public char getType() {
-        return mType;
+    public String getType() {
+        return type;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

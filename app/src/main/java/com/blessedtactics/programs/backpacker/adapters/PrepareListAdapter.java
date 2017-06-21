@@ -16,17 +16,23 @@ import com.blessedtactics.programs.backpacker.models.Item;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
+import io.realm.RealmChangeListener;
+import io.realm.RealmResults;
 
-public class PrepareListAdapter extends ArrayAdapter<Item> {
 
-    private ArrayList<Item> mItems;
+public class PrepareListAdapter extends ArrayAdapter<Item> implements RealmChangeListener {
+
+//    private ArrayList<Item> mItems;
     private int mResource;
     private LayoutInflater mInflater;
 
-    public PrepareListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<Item> items) {
+    private RealmResults<Item> mItems;
+
+    public PrepareListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull RealmResults<Item> items) {
         super(context, resource, items);
 
         mItems = items;
+        mItems.addChangeListener(this);
         mResource = resource;
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,7 +53,7 @@ public class PrepareListAdapter extends ArrayAdapter<Item> {
         }
 
         Item item = getItem(position);
-        if (item.getType() == 'c') {
+        if (item.getType().equalsIgnoreCase("c")) {
             ((TextView) view).setTypeface(Typeface.DEFAULT_BOLD);
         } else {
             ((TextView) view).setTypeface(Typeface.DEFAULT);
@@ -58,4 +64,8 @@ public class PrepareListAdapter extends ArrayAdapter<Item> {
         return view;
     }
 
+    @Override
+    public void onChange() {
+        notifyDataSetChanged();
+    }
 }

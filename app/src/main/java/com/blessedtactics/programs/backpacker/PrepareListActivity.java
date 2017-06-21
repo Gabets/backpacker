@@ -1,18 +1,12 @@
 package com.blessedtactics.programs.backpacker;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.blessedtactics.programs.backpacker.adapters.PrepareListAdapter;
-import com.blessedtactics.programs.backpacker.data.ItemContract.ItemsDbColumns;
-import com.blessedtactics.programs.backpacker.data.ItemsDbHelper;
 import com.blessedtactics.programs.backpacker.dialogs.AddCategoryDialog;
 import com.blessedtactics.programs.backpacker.dialogs.AddItemDialog;
 import com.blessedtactics.programs.backpacker.dialogs.CreateCategoryDialog;
@@ -21,17 +15,17 @@ import com.blessedtactics.programs.backpacker.models.Item;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class PrepareListActivity extends AppCompatActivity {
 
     private FragmentManager mFragmentManager;
 
     private ListView mLvPrepareList;
     private PrepareListAdapter mAdapter;
-
+    private Realm mRealm;
     private ArrayList<Item> items;
-
-    private ItemsDbHelper mItemsHelper;
-    private SQLiteDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +33,12 @@ public class PrepareListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prepare_list);
 
         mFragmentManager = getSupportFragmentManager();
+        mRealm = Realm.getInstance(this);
 
-        mItemsHelper = new ItemsDbHelper(this);
-        items = new ArrayList<>();
+//        getDBInfo();
+//        items = new ArrayList<>(mRealm.where(Item.class).findAll());
+        mAdapter = new PrepareListAdapter(this, R.layout.item_prepare_list, mRealm.where(Item.class).findAll());
 
-        getDBInfo();
-        mAdapter = new PrepareListAdapter(this, R.layout.item_prepare_list, items);
-
-//        mAdapter = new ArrayAdapter<>(this, R.layout.item_prepare_list, items);
         mLvPrepareList = (ListView) findViewById(R.id.lvPrepareList);
         mLvPrepareList.setAdapter(mAdapter);
 
@@ -58,27 +50,7 @@ public class PrepareListActivity extends AppCompatActivity {
         if (!items.isEmpty()) {
             items.clear();
         }
-        mDatabase = mItemsHelper.getReadableDatabase();
-        String[] projection = { ItemsDbColumns._ID,
-                ItemsDbColumns.COLUMN_NAME,
-                ItemsDbColumns.COLUMN_TYPE };
-        Cursor cursor = mDatabase.query(ItemsDbColumns.TABLE_NAME, projection,
-                null, null, null, null, null);
 
-        int idColumnIndex = cursor.getColumnIndex(ItemsDbColumns._ID);
-        int nameColumnIndex = cursor.getColumnIndex(ItemsDbColumns.COLUMN_NAME);
-        int typeColumnIndex = cursor.getColumnIndex(ItemsDbColumns.COLUMN_TYPE);
-
-        while (cursor.moveToNext()) {
-            int currentID = cursor.getInt(idColumnIndex);
-            String currentName = cursor.getString(nameColumnIndex);
-            char currentType = cursor.getString(typeColumnIndex).charAt(0);
-
-            items.add(new Item(currentName, currentType));
-        }
-
-        cursor.close();
-        mDatabase.close();
     }
 
 
@@ -104,20 +76,32 @@ public class PrepareListActivity extends AppCompatActivity {
     }
 
     public void addItem(String name) {
-        mDatabase = mItemsHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(ItemsDbColumns.COLUMN_NAME, name);
-        values.put(ItemsDbColumns.COLUMN_TYPE, "i");
+        mRealm.beginTransaction();
+        Item item = mRealm.createObject(Item.class);
+        item.setName(name);
+        item.setType("i");
+        mRealm.commitTransaction();
 
-        mDatabase.insert(ItemsDbColumns.TABLE_NAME, null, values);
-        mDatabase.close();
-        getDBInfo();
 
-        mAdapter.notifyDataSetChanged();
+//        mAdapter.notifyDataSetChanged();
+    }
+
+    private void removeFromList(String name) {
+        mRealm.beginTransaction();
+
+        RealmResults<Item> items = mRealm.where(Item.class).equalTo("name", name).findAll();
+        if (!items.isEmpty()) {
+            for (int i = items.size() -1; i >= 0; i--) {
+                items.get(i).removeFromRealm();
+            }
+        }
+
+        mRealm.commitTransaction();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mRealm.close();
     }
 }
