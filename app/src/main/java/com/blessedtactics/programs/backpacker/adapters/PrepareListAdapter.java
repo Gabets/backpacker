@@ -65,7 +65,8 @@ public class PrepareListAdapter extends ArrayAdapter<Item> implements RealmChang
     }
 
     @Override
-    public void onChange() {
+    public void onChange(Object o) {
         notifyDataSetChanged();
+
     }
 }

@@ -38,7 +38,7 @@ public class CreateItemDialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 if (etName.getText() != null && etName.getText().toString().trim().length() > 0) {
-                    ((PrepareListActivity) getActivity()).addItem(etName.getText().toString());
+                    ((PrepareListActivity) getActivity()).createItem(etName.getText().toString());
                     dismiss();
                 } else {
                     etName.setText("");

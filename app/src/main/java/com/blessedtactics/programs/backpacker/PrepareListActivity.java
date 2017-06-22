@@ -13,8 +13,6 @@ import com.blessedtactics.programs.backpacker.dialogs.CreateCategoryDialog;
 import com.blessedtactics.programs.backpacker.dialogs.CreateItemDialog;
 import com.blessedtactics.programs.backpacker.models.Item;
 
-import java.util.ArrayList;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -22,10 +20,7 @@ public class PrepareListActivity extends AppCompatActivity {
 
     private FragmentManager mFragmentManager;
 
-    private ListView mLvPrepareList;
-    private PrepareListAdapter mAdapter;
     private Realm mRealm;
-    private ArrayList<Item> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,26 +28,15 @@ public class PrepareListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prepare_list);
 
         mFragmentManager = getSupportFragmentManager();
-        mRealm = Realm.getInstance(this);
+        Realm.init(this);
+        mRealm = Realm.getDefaultInstance();
 
-//        getDBInfo();
-//        items = new ArrayList<>(mRealm.where(Item.class).findAll());
-        mAdapter = new PrepareListAdapter(this, R.layout.item_prepare_list, mRealm.where(Item.class).findAll());
+        PrepareListAdapter mAdapter = new PrepareListAdapter(this, R.layout.item_prepare_list, mRealm.where(Item.class).findAll());
 
-        mLvPrepareList = (ListView) findViewById(R.id.lvPrepareList);
+        ListView mLvPrepareList = (ListView) findViewById(R.id.lvPrepareList);
         mLvPrepareList.setAdapter(mAdapter);
 
     }
-
-
-
-    private void getDBInfo() {
-        if (!items.isEmpty()) {
-            items.clear();
-        }
-
-    }
-
 
     public void onClickAddCategory(View view) {
         AddCategoryDialog addCategoryDialog = new AddCategoryDialog();
@@ -75,27 +59,22 @@ public class PrepareListActivity extends AppCompatActivity {
         createItemDialog.show(mFragmentManager, "create item");
     }
 
-    public void addItem(String name) {
+    public void createItem(String name) {
         mRealm.beginTransaction();
         Item item = mRealm.createObject(Item.class);
         item.setName(name);
         item.setType("i");
         mRealm.commitTransaction();
-
-
-//        mAdapter.notifyDataSetChanged();
     }
 
     private void removeFromList(String name) {
         mRealm.beginTransaction();
-
         RealmResults<Item> items = mRealm.where(Item.class).equalTo("name", name).findAll();
         if (!items.isEmpty()) {
             for (int i = items.size() -1; i >= 0; i--) {
-                items.get(i).removeFromRealm();
+                items.get(i).deleteFromRealm();
             }
         }
-
         mRealm.commitTransaction();
     }
 
