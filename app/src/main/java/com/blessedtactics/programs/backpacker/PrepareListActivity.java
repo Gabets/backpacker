@@ -28,10 +28,9 @@ public class PrepareListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prepare_list);
 
         mFragmentManager = getSupportFragmentManager();
-        Realm.init(this);
         mRealm = Realm.getDefaultInstance();
 
-        PrepareListAdapter mAdapter = new PrepareListAdapter(this, R.layout.item_prepare_list, mRealm.where(Item.class).findAll());
+        PrepareListAdapter mAdapter = new PrepareListAdapter(this, R.layout.item_prepare_list, mRealm.where(Item.class).findAll().sort("name"));
 
         ListView mLvPrepareList = (ListView) findViewById(R.id.lvPrepareList);
         mLvPrepareList.setAdapter(mAdapter);

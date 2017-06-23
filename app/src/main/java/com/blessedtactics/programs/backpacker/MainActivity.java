@@ -3,9 +3,13 @@ package com.blessedtactics.programs.backpacker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.blessedtactics.programs.backpacker.models.Item;
+
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Realm.init(this);
-        Realm realm = Realm.getDefaultInstance();
+        firstRunCheck();
+
     }
 
     public void onClickPrepareList(View view) {
@@ -28,5 +32,37 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickInfo(View view) {
         startActivity(new Intent(this, InfoActivity.class));
+    }
+
+    private void firstRunCheck() {
+
+        Realm realm = Realm.getDefaultInstance();
+
+        RealmResults<Item> results = realm.where(Item.class).findAll();
+        if (results == null || results.size() == 0) {
+            Log.d(App.LOG_TAG, "empty DB");
+            // create default DB
+            final String[] categories = getResources().getStringArray(R.array.categories);
+            final String[] items = getResources().getStringArray(R.array.items);
+
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+
+                    for (String categoryName : categories) {
+                        Item item = realm.createObject(Item.class);
+                        item.setName(categoryName);
+                        item.setType("c");
+                    }
+                    for (String itemName : items) {
+                        Item item = realm.createObject(Item.class);
+                        item.setName(itemName);
+                        item.setType("i");
+                    }
+                }
+            });
+
+        }
+        realm.close();
     }
 }

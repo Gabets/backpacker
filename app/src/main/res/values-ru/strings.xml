@@ -18,89 +18,87 @@
 
     <string name="toast_empty_name">Пустое название!</string>
 
-    <string name="category_instruments">Инструменты</string>
-    <string name="saw">пила</string>
-    <string name="adhesive_tape">изолента</string>
-    <string name="machete">мачете</string>
-    <string name="multitool">мультитул</string>
-    <string name="water_filter">фильтр</string>
-    <string name="hatchet">топорик</string>
+    <string-array name="categories">
+        <item>Гигиена</item>
+        <item>Для Стоянки</item>
+        <item>Еда</item>
+        <item>Инструменты</item>
+        <item>Одежда</item>
+        <item>Посуда</item>
+        <item>Разное</item>
+        <item>Развлечения</item>
+    </string-array>
 
-    <string name="category_others">Разное</string>
-    <string name="hammock">гамак</string>
-    <string name="map_case">планшет для карты</string>
-    <string name="flask_with_strong_drink">фляжка с крепким алкоголем</string>
-    <string name="rope">верёвка</string>
-    <string name="bottle_of_water">бутылка с водой</string>
-    <string name="water_flask">фляжка с водой</string>
-    <string name="book">книга</string>
-    <string name="first_aid_kit">аптечка</string>
-    <string name="needle_and_cotton">нитка с иголкой</string>
-    <string name="pocket_mirror">зеркальце</string>
-    <string name="repellent">репеллент</string>
-    <string name="binoculars">бинокль</string>
-    <string name="map">карта</string>
-    <string name="passport">паспорт</string>
-    <string name="spare_batteries">запсные батарейки</string>
-    <string name="GPS">GPS</string>
-    <string name="trekking_poles">трекинговые палки</string>
-    <string name="pistol">пистолет</string>
-    <string name="keys">ключи</string>
-    <string name="wallet">кошелёк</string>
-    <string name="phone">телефон</string>
-    <string name="lighter">зажигалка</string>
-    <string name="compass">компас</string>
-    <string name="the_tablet">планшет</string>
-
-    <string name="category_for_camping">Для Стоянки</string>
-    <string name="mat">коврик</string>
-    <string name="sleeping_bag">спальник</string>
-    <string name="tent">палатка</string>
-    <string name="canopy">палатка</string>
-    <string name="toilet_paper">туалетная бумага</string>
-    <string name="kindling">растопка</string>
-    <string name="dry_fuel">сухое топливо</string>
-    <string name="matches">спички</string>
-    <string name="sit_mat">сидушка</string>
-    <string name="flashlight">фонарик</string>
-    <string name="e_reader">читалка</string>
-
-    <string name="category_clothing">Одежда</string>
-    <string name="spare_socks">запасные носки</string>
-    <string name="warm_socks">тёплые носки</string>
-    <string name="warm_hat">тёплая шапка</string>
-    <string name="poncho">пончо</string>
-    <string name="gloves">перчатки</string>
-
-    <string name="category_for_washing">Для умывания</string>
-    <string name="towel">полотенце</string>
-    <string name="soap">мыло</string>
-    <string name="wet_wipes">влажные салфетки</string>
-    <string name="toothpaste">зубная паста</string>
-    <string name="toothbrush">зубная щётка</string>
-    <string name="dental_floss">зубная нить</string>
-
-    <string name="category_dishes">Посуда</string>
-    <string name="pan">кастрюля</string>
-    <string name="mug">кружка</string>
-    <string name="bowl">миска</string>
-    <string name="thermos">термос</string>
-    <string name="spoon">ложка</string>
-    <string name="knife">нож</string>
-
-    <string name="category_food">Еда</string>
-    <string name="chewing_gum">жвачка</string>
-    <string name="bread">хлеб</string>
-    <string name="vegetables">овощи</string>
-    <string name="soup">суп</string>
-    <string name="meat">мясо</string>
-    <string name="tea">чай</string>
-    <string name="snacks">вкусняшки</string>
-    <string name="sugar">сахар</string>
-    <string name="salt">соль</string>
-    <string name="MRE">сухпаёк</string>
-
-    <string name="category_fun">Развлечения</string>
-    <string name="cards">карты</string>
-    <string name="board_game">настолка</string>
+    <string-array name="items">
+        <item>пила</item>
+        <item>изолента</item>
+        <item>мачете</item>
+        <item>мультитул</item>
+        <item>фильтр для воды</item>
+        <item>топорик</item>
+        <item>гамак</item>
+        <item>планшет для карты</item>
+        <item>фляжка с крепким напитком</item>
+        <item>верёвка</item>
+        <item>бутылка с водой</item>
+        <item>фляжка с водой</item>
+        <item>книга</item>
+        <item>аптечка</item>
+        <item>нитка с иголкой</item>
+        <item>карманное зеркальце</item>
+        <item>репеллент</item>
+        <item>бинокль</item>
+        <item>карта</item>
+        <item>пасспорт</item>
+        <item>запасные батарейки</item>
+        <item>навигатор</item>
+        <item>треккинговые палки</item>
+        <item>пистолет</item>
+        <item>ключи</item>
+        <item>кошелёк</item>
+        <item>телефон</item>
+        <item>зажигалка</item>
+        <item>компас</item>
+        <item>планшет</item>
+        <item>коврик</item>
+        <item>спальник</item>
+        <item>палатка</item>
+        <item>тент</item>
+        <item>туалетная бумага</item>
+        <item>растопка</item>
+        <item>сухое топливо</item>
+        <item>спички</item>
+        <item>сидушка</item>
+        <item>фонарик</item>
+        <item>читалка</item>
+        <item>запасные носки</item>
+        <item>тёплые носки</item>
+        <item>тёплая шапка</item>
+        <item>пончо</item>
+        <item>перчатки</item>
+        <item>полотенце</item>
+        <item>мыло</item>
+        <item>влажные салфетки</item>
+        <item>зубная паста</item>
+        <item>зубная щётка</item>
+        <item>зубная нить</item>
+        <item>кастрюлька</item>
+        <item>кружка</item>
+        <item>миска</item>
+        <item>термос</item>
+        <item>ложка</item>
+        <item>нож</item>
+        <item>жвачка</item>
+        <item>хлеб</item>
+        <item>овощи</item>
+        <item>суп</item>
+        <item>мясо</item>
+        <item>чай</item>
+        <item>вкусняшки</item>
+        <item>сахар</item>
+        <item>соль</item>
+        <item>сухпаёк</item>
+        <item>карты</item>
+        <item>настолка</item>
+    </string-array>
 </resources>
