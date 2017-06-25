@@ -5,6 +5,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.Required;
 
 public class Item  extends RealmObject {
+
     @Required
     private String name;
     private String type;

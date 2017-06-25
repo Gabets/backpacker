@@ -11,12 +11,16 @@
     <string name="btn_create_item_text">Создать предмет</string>
     <string name="btn_create_category_text">Создать категорию</string>
 
-    <string name="title_choose_category">Выберите категорию</string>
-    <string name="title_choose_item">Выберите предмет</string>
-    <string name="title_input_new_category">Введите название категории</string>
-    <string name="title_input_new_item">Введите название предмета</string>
+    <string name="title_choose_category"><b>Выберите категорию</b></string>
+    <string name="title_choose_item"><b>Выберите предмет</b></string>
+    <string name="title_input_new_category"><b>Введите название категории</b></string>
+    <string name="title_input_new_item"><b>Введите название предмета</b></string>
+    <string name="title_delete_item"><b>Удалить элемент</b></string>
 
     <string name="toast_empty_name">Пустое название!</string>
+
+    <string name="btn_delete_from_list">из списка</string>
+    <string name="btn_delete_from_db">из базы</string>
 
     <string-array name="categories">
         <item>Гигиена</item>

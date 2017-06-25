@@ -10,12 +10,16 @@
     <string name="btn_create_item_text">Create item</string>
     <string name="btn_create_category_text">Create category</string>
 
-    <string name="title_choose_category">Choose category</string>
-    <string name="title_choose_item">Choose item</string>
-    <string name="title_input_new_category">Input new category</string>
-    <string name="title_input_new_item">Input new item</string>
+    <string name="title_choose_category"><b>Choose category</b></string>
+    <string name="title_choose_item"><b>Choose item</b></string>
+    <string name="title_input_new_category"><b>Input new category</b></string>
+    <string name="title_input_new_item"><b>Input new item</b></string>
+    <string name="title_delete_item"><b>Delete item</b></string>
 
     <string name="toast_empty_name">Empty name!</string>
+
+    <string name="btn_delete_from_list">from list</string>
+    <string name="btn_delete_from_db">from database</string>
 
     <string-array name="categories">
         <item>Clothing</item>

@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         Realm realm = Realm.getDefaultInstance();
 
         RealmResults<Item> results = realm.where(Item.class).findAll();
-        if (results == null || results.size() == 0) {
-            Log.d(App.LOG_TAG, "empty DB");
+        Log.d(App.LOG_TAG, "results.size = " + results.size());
+        if (results.size() == 0) {
             // create default DB
             final String[] categories = getResources().getStringArray(R.array.categories);
             final String[] items = getResources().getStringArray(R.array.items);

@@ -53,13 +53,14 @@ public class PrepareListAdapter extends ArrayAdapter<Item> implements RealmChang
         }
 
         Item item = getItem(position);
-        if (item.getType().equalsIgnoreCase("c")) {
-            ((TextView) view).setTypeface(Typeface.DEFAULT_BOLD);
-        } else {
-            ((TextView) view).setTypeface(Typeface.DEFAULT);
+        if (item != null) {
+            if (item.getType().equalsIgnoreCase("c")) {
+                ((TextView) view).setTypeface(Typeface.DEFAULT_BOLD);
+            } else {
+                ((TextView) view).setTypeface(Typeface.DEFAULT);
+            }
+            ((TextView) view).setText(item.getName());
         }
-        ((TextView) view).setText(item.getName());
-
 
         return view;
     }

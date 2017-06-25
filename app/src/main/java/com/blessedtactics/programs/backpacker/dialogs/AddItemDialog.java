@@ -16,20 +16,23 @@ public class AddItemDialog extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //create items array
-        final String[] itemsArray = {"1", "2", "3"};
+        Bundle bundle = getArguments();
+        String[] itemsArray = bundle.getStringArray("items");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setTitle(R.string.title_choose_category)
+        builder.setTitle(R.string.title_choose_item)
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
                 .setItems(itemsArray, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // TO DO
 
                     }
                 });
-
-
-
 
         return builder.create();
     }

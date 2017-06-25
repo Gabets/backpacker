@@ -1,5 +1,6 @@
 package com.blessedtactics.programs.backpacker.dialogs;
 
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,29 +10,31 @@ import android.support.v7.app.AlertDialog;
 
 import com.blessedtactics.programs.backpacker.R;
 
-public class AddCategoryDialog extends DialogFragment{
+public class DeleteItemDialog extends DialogFragment {
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        //create categories array
-        Bundle bundle = getArguments();
-        String[] categoriesArray = bundle.getStringArray("categories");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.title_choose_category)
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.title_delete_item)
+                .setNeutralButton(R.string.btn_delete_from_db, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton(R.string.btn_delete_from_list, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 })
-                .setItems(categoriesArray, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TO DO
-
+                .setPositiveButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
                     }
-                });
+                })
+        ;
 
         return builder.create();
     }
