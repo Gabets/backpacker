@@ -15,7 +15,7 @@
     <string name="title_choose_item"><b>Выберите предмет</b></string>
     <string name="title_input_new_category"><b>Введите название категории</b></string>
     <string name="title_input_new_item"><b>Введите название предмета</b></string>
-    <string name="title_delete_item"><b>Удалить элемент</b></string>
+    <string name="title_delete"><b>Удалить</b> </string>
 
     <string name="toast_empty_name">Пустое название!</string>
 

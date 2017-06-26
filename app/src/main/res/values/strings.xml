@@ -14,7 +14,7 @@
     <string name="title_choose_item"><b>Choose item</b></string>
     <string name="title_input_new_category"><b>Input new category</b></string>
     <string name="title_input_new_item"><b>Input new item</b></string>
-    <string name="title_delete_item"><b>Delete item</b></string>
+    <string name="title_delete"><b>Delete</b> </string>
 
     <string name="toast_empty_name">Empty name!</string>
 

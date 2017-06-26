@@ -102,18 +102,25 @@ public class PrepareListActivity extends AppCompatActivity {
         final String name = item.getName();
         Log.d(App.LOG_TAG, "onClickListItem item = " + name);
 
-        DeleteItemDialog deleteItemDialog = new DeleteItemDialog();
-        deleteItemDialog.show(mFragmentManager, "delete item");
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name);
 
-//        mRealm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                RealmResults<Item> items = mRealm.where(Item.class).equalTo("name", name).findAll();
-//                if (!items.isEmpty()) {
-//                    items.deleteAllFromRealm();
-//                }
-//            }
-//        });
+        DeleteItemDialog deleteItemDialog = new DeleteItemDialog();
+        deleteItemDialog.setArguments(bundle);
+        deleteItemDialog.show(mFragmentManager, "delete item");
+    }
+
+    public void deleteFromDB(String name) {
+        final RealmResults<Item> items = mRealm.where(Item.class).equalTo("name", name).findAll();
+        if (items != null) {
+            mRealm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    items.deleteAllFromRealm();
+                }
+            });
+        }
+
     }
 
     @Override

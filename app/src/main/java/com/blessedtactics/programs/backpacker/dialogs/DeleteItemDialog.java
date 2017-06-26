@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
+import com.blessedtactics.programs.backpacker.PrepareListActivity;
 import com.blessedtactics.programs.backpacker.R;
 
 public class DeleteItemDialog extends DialogFragment {
@@ -16,10 +17,14 @@ public class DeleteItemDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+        Bundle bundle = getArguments();
+        final String name = bundle.getString("name");
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.title_delete_item)
+        builder.setTitle(getResources().getString(R.string.title_delete) + name)
                 .setNeutralButton(R.string.btn_delete_from_db, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        ((PrepareListActivity) getActivity()).deleteFromDB(name);
                         dialog.cancel();
                     }
                 })
