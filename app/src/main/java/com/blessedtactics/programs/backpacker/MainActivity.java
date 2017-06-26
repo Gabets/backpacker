@@ -7,19 +7,26 @@ import android.util.Log;
 import android.view.View;
 
 import com.blessedtactics.programs.backpacker.models.Item;
+import com.blessedtactics.programs.backpacker.models.ListItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mRealm = Realm.getDefaultInstance();
         firstRunCheck();
-
     }
 
     public void onClickPrepareList(View view) {
@@ -35,34 +42,64 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void firstRunCheck() {
-
-        Realm realm = Realm.getDefaultInstance();
-
-        RealmResults<Item> results = realm.where(Item.class).findAll();
+        RealmResults<Item> results = mRealm.where(Item.class).findAll();
         Log.d(App.LOG_TAG, "results.size = " + results.size());
+
         if (results.size() == 0) {
-            // create default DB
-            final String[] categories = getResources().getStringArray(R.array.categories);
-            final String[] items = getResources().getStringArray(R.array.items);
+            //create default DB and list
+            String[] clothes = getResources().getStringArray(R.array.clothing);
+            createListItems(clothes);
 
-            realm.executeTransaction(new Realm.Transaction() {
-                @Override
-                public void execute(Realm realm) {
+            String[] dishes = getResources().getStringArray(R.array.dishes);
+            createListItems(dishes);
 
-                    for (String categoryName : categories) {
-                        Item item = realm.createObject(Item.class);
-                        item.setName(categoryName);
-                        item.setType("c");
-                    }
-                    for (String itemName : items) {
-                        Item item = realm.createObject(Item.class);
-                        item.setName(itemName);
-                        item.setType("i");
-                    }
-                }
-            });
+            String[] forCamps = getResources().getStringArray(R.array.for_camping);
+            createListItems(forCamps);
 
+            String[] forWashes = getResources().getStringArray(R.array.for_washing);
+            createListItems(forWashes);
+
+            String[] foods = getResources().getStringArray(R.array.food);
+            createListItems(foods);
+
+            String[] forFunny = getResources().getStringArray(R.array.fun);
+            createListItems(forFunny);
+
+            String[] instruments = getResources().getStringArray(R.array.instruments);
+            createListItems(instruments);
+
+            String[] others = getResources().getStringArray(R.array.others);
+            createListItems(others);
         }
-        realm.close();
+    }
+
+    private void createListItems(final String[] itemsArray) {
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                ListItem listItem = realm.createObject(ListItem.class);
+
+                Item categoryItem = realm.createObject(Item.class);
+                categoryItem.setName(itemsArray[0]);
+                categoryItem.setType("c");
+
+                listItem.setCategory(categoryItem);
+
+                RealmList<Item> items = new RealmList<>();
+                for (int i = 1; i < itemsArray.length; i++) {
+                    Item item = realm.createObject(Item.class);
+                    item.setName(itemsArray[i]);
+                    item.setType("i");
+                    items.add(item);
+                }
+                listItem.setItems(items);
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRealm.close();
     }
 }

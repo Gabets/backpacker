@@ -1,6 +1,7 @@
 package com.blessedtactics.programs.backpacker.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -14,25 +15,24 @@ import android.widget.TextView;
 import com.blessedtactics.programs.backpacker.models.Item;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.zip.Inflater;
 
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 
-public class PrepareListAdapter extends ArrayAdapter<Item> implements RealmChangeListener {
+public class PrepareListAdapter extends ArrayAdapter<Item> {
 
-//    private ArrayList<Item> mItems;
     private int mResource;
     private LayoutInflater mInflater;
 
-    private RealmResults<Item> mItems;
+    private LinkedList<Item> mItems;
 
-    public PrepareListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull RealmResults<Item> items) {
+    public PrepareListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull LinkedList<Item> items) {
         super(context, resource, items);
 
         mItems = items;
-        mItems.addChangeListener(this);
         mResource = resource;
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -63,11 +63,5 @@ public class PrepareListAdapter extends ArrayAdapter<Item> implements RealmChang
         }
 
         return view;
-    }
-
-    @Override
-    public void onChange(Object o) {
-        notifyDataSetChanged();
-
     }
 }

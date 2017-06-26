@@ -22,48 +22,41 @@
     <string name="btn_delete_from_list">из списка</string>
     <string name="btn_delete_from_db">из базы</string>
 
-    <string-array name="categories">
-        <item>Гигиена</item>
-        <item>Для Стоянки</item>
-        <item>Еда</item>
-        <item>Инструменты</item>
+    <string-array name="clothing">
         <item>Одежда</item>
-        <item>Посуда</item>
-        <item>Разное</item>
-        <item>Развлечения</item>
+        <item>запасные носки</item>
+        <item>тёплые носки</item>
+        <item>тёплая шапка</item>
+        <item>пончо</item>
+        <item>перчатки</item>
     </string-array>
 
-    <string-array name="items">
-        <item>пила</item>
-        <item>изолента</item>
-        <item>мачете</item>
-        <item>мультитул</item>
-        <item>фильтр для воды</item>
-        <item>топорик</item>
-        <item>гамак</item>
-        <item>планшет для карты</item>
-        <item>фляжка с крепким напитком</item>
-        <item>верёвка</item>
-        <item>бутылка с водой</item>
-        <item>фляжка с водой</item>
-        <item>книга</item>
-        <item>аптечка</item>
-        <item>нитка с иголкой</item>
-        <item>карманное зеркальце</item>
-        <item>репеллент</item>
-        <item>бинокль</item>
-        <item>карта</item>
-        <item>пасспорт</item>
-        <item>запасные батарейки</item>
-        <item>навигатор</item>
-        <item>треккинговые палки</item>
-        <item>пистолет</item>
-        <item>ключи</item>
-        <item>кошелёк</item>
-        <item>телефон</item>
-        <item>зажигалка</item>
-        <item>компас</item>
-        <item>планшет</item>
+    <string-array name="dishes">
+        <item>Посуда</item>
+        <item>кастрюля</item>
+        <item>кружка</item>
+        <item>миска</item>
+        <item>термос</item>
+        <item>ложка</item>
+        <item>нож</item>
+    </string-array>
+
+    <string-array name="food">
+        <item>Еда</item>
+        <item>жевательная резинка</item>
+        <item>хлеб</item>
+        <item>овощи</item>
+        <item>суп</item>
+        <item>мясо</item>
+        <item>чай</item>
+        <item>вкусняшки</item>
+        <item>сахар</item>
+        <item>соль</item>
+        <item>сухпаёк</item>
+    </string-array>
+
+    <string-array name="for_camping">
+        <item>Для Стоянки</item>
         <item>коврик</item>
         <item>спальник</item>
         <item>палатка</item>
@@ -75,34 +68,59 @@
         <item>сидушка</item>
         <item>фонарик</item>
         <item>читалка</item>
-        <item>запасные носки</item>
-        <item>тёплые носки</item>
-        <item>тёплая шапка</item>
-        <item>пончо</item>
-        <item>перчатки</item>
+    </string-array>
+
+    <string-array name="for_washing">
+        <item>Гигиена</item>
         <item>полотенце</item>
         <item>мыло</item>
         <item>влажные салфетки</item>
         <item>зубная паста</item>
         <item>зубная щётка</item>
         <item>зубная нить</item>
-        <item>кастрюлька</item>
-        <item>кружка</item>
-        <item>миска</item>
-        <item>термос</item>
-        <item>ложка</item>
-        <item>нож</item>
-        <item>жвачка</item>
-        <item>хлеб</item>
-        <item>овощи</item>
-        <item>суп</item>
-        <item>мясо</item>
-        <item>чай</item>
-        <item>вкусняшки</item>
-        <item>сахар</item>
-        <item>соль</item>
-        <item>сухпаёк</item>
+    </string-array>
+
+    <string-array name="fun">
+        <item>Развлечения</item>
         <item>карты</item>
         <item>настолка</item>
     </string-array>
+
+    <string-array name="instruments">
+        <item>Инструменты</item>
+        <item>пила</item>
+        <item>изолента</item>
+        <item>мачете</item>
+        <item>мультитул</item>
+        <item>фильтр для воды</item>
+        <item>топорик</item>
+    </string-array>
+
+    <string-array name="others">
+        <item>Разное</item>
+        <item>гамак</item>
+        <item>планшет для карты</item>
+        <item>фляжка с алкоголем</item>
+        <item>верёвка</item>
+        <item>бутылка воды</item>
+        <item>фляжка для воды</item>
+        <item>книга</item>
+        <item>аптечка</item>
+        <item>нитка с иголкой</item>
+        <item>карманное зеркальце</item>
+        <item>репеллент</item>
+        <item>бинокль</item>
+        <item>карта</item>
+        <item>паспорт</item>
+        <item>запасные батарейки</item>
+        <item>навигатор</item>
+        <item>треккинговые палки</item>
+        <item>ключи</item>
+        <item>бумажник</item>
+        <item>телефон</item>
+        <item>зажигалка</item>
+        <item>компас</item>
+        <item>планшет</item>
+    </string-array>
+
 </resources>

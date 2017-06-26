@@ -21,88 +21,105 @@
     <string name="btn_delete_from_list">from list</string>
     <string name="btn_delete_from_db">from database</string>
 
-    <string-array name="categories">
+    <string-array name="clothing">
         <item>Clothing</item>
-        <item>Dishes</item>
-        <item>For Camping</item>
-        <item>For washing</item>
-        <item>Food</item>
-        <item>Fun</item>
-        <item>Instruments</item>
-        <item>Others</item>
-    </string-array>
-
-    <string-array name="items">
-        <item>adhesive tape</item>
-
-        <item>board game</item>
-        <item>book</item>
-        <item>bottle of water</item>
-        <item>bowl</item>
-        <item>bread</item>
-        <item>canopy</item>
-        <item>cards</item>
-        <item>chewing gum</item>
-        <item>compass</item>
-        <item>dental floss</item>
-        <item>dry fuel</item>
-        <item>e-reader</item>
-        <item>first aid kit</item>
-        <item>flashlight</item>
-        <item>flask with strong drink</item>
-        <item>gloves</item>
-        <item>GPS</item>
-        <item>hammock</item>
-        <item>hatchet</item>
-        <item>keys</item>
-        <item>kindling</item>
-        <item>knife</item>
-        <item>lighter</item>
-        <item>machete</item>
-        <item>map</item>
-        <item>map case</item>
-        <item>mat</item>
-        <item>matches</item>
-        <item>meat</item>
-        <item>MRE</item>
-        <item>mug</item>
-        <item>multi tool</item>
-        <item>needle and cotton</item>
-        <item>pan</item>
-        <item>passport</item>
-        <item>personal water filter</item>
-        <item>phone</item>
-        <item>pistol</item>
-        <item>pocket mirror</item>
-        <item>poncho</item>
-        <item>repellent</item>
-        <item>rope</item>
-        <item>salt</item>
-        <item>saw</item>
-        <item>sit mat</item>
-        <item>sleeping bag</item>
-        <item>snacks</item>
-        <item>soap</item>
-        <item>soup</item>
-        <item>spare batteries</item>
         <item>spare socks</item>
-        <item>spoon</item>
-        <item>sugar</item>
-        <item>tea</item>
-        <item>tent</item>
-        <item>thermos</item>
-        <item>the tablet</item>
-        <item>toilet paper</item>
-        <item>towel</item>
-        <item>toothbrush</item>
-        <item>toothpaste</item>
-        <item>trekking poles</item>
-        <item>vegetables</item>
-        <item>wallet</item>
-        <item>warm hat</item>
         <item>warm socks</item>
-        <item>water flask</item>
-        <item>wet wipes</item>
-        <item>binoculars</item>
+        <item>warm hat</item>
+        <item>poncho</item>
+        <item>gloves</item>
     </string-array>
+
+    <string-array name="dishes">
+        <item>Dishes</item>
+        <item>pan</item>
+        <item>mug</item>
+        <item>bowl</item>
+        <item>thermos</item>
+        <item>spoon</item>
+        <item>knife</item>
+    </string-array>
+
+    <string-array name="food">
+        <item>Food</item>
+        <item>chewing gum</item>
+        <item>bread</item>
+        <item>vegetables</item>
+        <item>soup</item>
+        <item>meat</item>
+        <item>tea</item>
+        <item>snacks</item>
+        <item>sugar</item>
+        <item>salt</item>
+        <item>MRE</item>
+    </string-array>
+
+    <string-array name="for_camping">
+        <item>For Camping</item>
+        <item>mat</item>
+        <item>sleeping bag</item>
+        <item>tent</item>
+        <item>canopy</item>
+        <item>toilet paper</item>
+        <item>kindling</item>
+        <item>dry fuel</item>
+        <item>matches</item>
+        <item>sit mat</item>
+        <item>flashlight</item>
+        <item>e-reader</item>
+    </string-array>
+
+    <string-array name="for_washing">
+        <item>For Washing</item>
+        <item>towel</item>
+        <item>soap</item>
+        <item>wet wipes</item>
+        <item>toothpaste</item>
+        <item>toothbrush</item>
+        <item>dental floss</item>
+    </string-array>
+
+    <string-array name="fun">
+        <item>Fun</item>
+        <item>cards</item>
+        <item>board game</item>
+    </string-array>
+
+    <string-array name="instruments">
+        <item>Instruments</item>
+        <item>saw</item>
+        <item>adhesive tape</item>
+        <item>machete</item>
+        <item>multi-tool</item>
+        <item>personal water filter</item>
+        <item>hatchet</item>
+    </string-array>
+
+    <string-array name="others">
+        <item>Others</item>
+        <item>hammock</item>
+        <item>map case</item>
+        <item>flask with booze</item>
+        <item>rope</item>
+        <item>bottle of water</item>
+        <item>water flask</item>
+        <item>book</item>
+        <item>first aid kit</item>
+        <item>needle and cotton</item>
+        <item>pocket mirror</item>
+        <item>repellent</item>
+        <item>binoculars</item>
+        <item>map</item>
+        <item>passport</item>
+        <item>spare_batteries</item>
+        <item>GPS</item>
+        <item>trekking poles</item>
+        <item>keys</item>
+        <item>wallet</item>
+        <item>phone</item>
+        <item>lighter</item>
+        <item>compass</item>
+        <item>the tablet</item>
+    </string-array>
+
 </resources>

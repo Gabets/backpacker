@@ -6,6 +6,14 @@ import io.realm.annotations.Required;
 
 public class Item  extends RealmObject {
 
+    public Item() {
+    }
+
+    public Item(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
+
     @Required
     private String name;
     private String type;

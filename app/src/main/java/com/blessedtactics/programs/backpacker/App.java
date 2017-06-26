@@ -7,7 +7,7 @@ import io.realm.Realm;
 
 public class App extends Application {
 
-    protected final static String LOG_TAG = "Backpacker";
+    public final static String LOG_TAG = "Backpacker";
 
     @Override
     public void onCreate() {
