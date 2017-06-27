@@ -39,9 +39,8 @@ public class PrepareListActivity extends AppCompatActivity {
 
         mFragmentManager = getSupportFragmentManager();
         mRealm = Realm.getDefaultInstance();
-        RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll().sort("category.name");
-        mItemsList = resultsToList(results);
 
+        mItemsList = resultsToList();
         mAdapter = new PrepareListAdapter(this, R.layout.item_prepare_list, mItemsList);
 
         ListView lvPrepareList = (ListView) findViewById(R.id.lvPrepareList);
@@ -55,7 +54,8 @@ public class PrepareListActivity extends AppCompatActivity {
         });
     }
 
-    private LinkedList<Item> resultsToList(RealmResults<ListItem> results) {
+    private LinkedList<Item> resultsToList() {
+        RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll().sort("category.name");
         LinkedList<Item> fullList = new LinkedList<>();
         for (ListItem listItem : results) {
             LinkedList<Item> list = new LinkedList<>();
@@ -103,6 +103,15 @@ public class PrepareListActivity extends AppCompatActivity {
                 listItem.setCategory(categoryItem);
             }
         });
+        for (int i = 0; i < mItemsList.size(); i++) {
+            Item item = mItemsList.get(i);
+            if (item.getType().equalsIgnoreCase("c")
+                    && item.getName().compareToIgnoreCase(categoryName) > 0) {
+                mItemsList.add(i, new Item(categoryName, "c"));
+                mAdapter.notifyDataSetChanged();
+                return;
+            }
+        }
         mItemsList.add(new Item(categoryName, "c"));
         mAdapter.notifyDataSetChanged();
     }
