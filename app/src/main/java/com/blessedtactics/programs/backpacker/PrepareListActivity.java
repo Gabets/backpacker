@@ -26,11 +26,16 @@ import io.realm.RealmResults;
 
 public class PrepareListActivity extends AppCompatActivity {
 
+    private final String CATEGORY_NAME = "category.name";
+
     private FragmentManager mFragmentManager;
     private PrepareListAdapter mAdapter;
     private LinkedList<Item> mItemsList;
 
     private Realm mRealm;
+
+    private int mClickedPosition;
+    private Item mClickedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +53,15 @@ public class PrepareListActivity extends AppCompatActivity {
         lvPrepareList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item item = (Item) parent.getItemAtPosition(position);
-                onClickListItem(item);
+                mClickedPosition = position;
+                mClickedItem = (Item) parent.getItemAtPosition(position);
+                onClickListItem();
             }
         });
     }
 
     private LinkedList<Item> resultsToList() {
-        RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll().sort("category.name");
+        RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll().sort(CATEGORY_NAME);
         LinkedList<Item> fullList = new LinkedList<>();
         for (ListItem listItem : results) {
             LinkedList<Item> list = new LinkedList<>();
@@ -161,29 +167,75 @@ public class PrepareListActivity extends AppCompatActivity {
         });
     }
 
-    private void onClickListItem(Item item) {
-        final String name = item.getName();
-        Log.d(App.LOG_TAG, "onClickListItem item = " + name);
+    private void onClickListItem() {
+        Log.d(App.LOG_TAG, "onClickListItem item = " + mClickedItem.getName() + " type = " + mClickedItem.getType() );
 
         Bundle bundle = new Bundle();
-        bundle.putString("name", name);
+        bundle.putString("name", mClickedItem.getName());
 
         DeleteItemDialog deleteItemDialog = new DeleteItemDialog();
         deleteItemDialog.setArguments(bundle);
         deleteItemDialog.show(mFragmentManager, "delete item");
     }
 
-    public void deleteFromDB(String name) {
-        final RealmResults<Item> items = mRealm.where(Item.class).equalTo("name", name).findAll();
-        if (items != null) {
+    public void deleteFromDB() {
+        mItemsList.remove(mClickedPosition);
+        mAdapter.notifyDataSetChanged();
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<Item> items = mRealm.where(Item.class)
+                        .equalTo("name", mClickedItem.getName())
+                        .equalTo("type", mClickedItem.getType())
+                        .findAll();
+                items.deleteAllFromRealm();
+            }
+        });
+    }
+
+    public void deleteFromList() {
+
+        if (mClickedItem.getType().equalsIgnoreCase("c")) {
+            //if it is a category
+            do {
+                mItemsList.remove(mClickedPosition);
+            } while (mClickedPosition < mItemsList.size() &&
+                    !mItemsList.get(mClickedPosition).getType().equalsIgnoreCase("c"));
+
             mRealm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
-                    items.deleteAllFromRealm();
+                    ListItem listItem =  mRealm.where(ListItem.class)
+                            .equalTo(CATEGORY_NAME, mClickedItem.getName())
+                            .findFirst();
+                    listItem.deleteFromRealm();
                 }
             });
-        }
 
+        } else {
+            //if it is a item
+            mItemsList.remove(mClickedPosition);
+            for (int i = mClickedPosition - 1; i >=0; i--) {
+                final Item category = mItemsList.get(i);
+
+                if (category.getType().equalsIgnoreCase("c")) {
+                    final Item item = mClickedItem;
+                    mRealm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            ListItem listItem = mRealm.where(ListItem.class)
+                                    .equalTo(CATEGORY_NAME, category.getName())
+                                    .findFirst();
+                            Log.d(App.LOG_TAG, "category = " + listItem.getCategory().getName());
+
+                            listItem.getItems().remove(item);
+                        }
+                    });
+                    break;
+                }
+            }
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

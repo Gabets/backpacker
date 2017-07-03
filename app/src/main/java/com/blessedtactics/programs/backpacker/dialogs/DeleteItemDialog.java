@@ -24,13 +24,14 @@ public class DeleteItemDialog extends DialogFragment {
         builder.setTitle(getResources().getString(R.string.title_delete) + name)
                 .setNeutralButton(R.string.btn_delete_from_db, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        ((PrepareListActivity) getActivity()).deleteFromDB(name);
+                        ((PrepareListActivity) getActivity()).deleteFromDB();
                         dialog.cancel();
                     }
                 })
                 .setNegativeButton(R.string.btn_delete_from_list, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        ((PrepareListActivity) getActivity()).deleteFromList();
                         dialog.cancel();
                     }
                 })
