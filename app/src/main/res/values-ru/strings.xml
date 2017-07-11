@@ -123,4 +123,6 @@
         <item>планшет</item>
     </string-array>
 
+    <string name="add_item_text">Добавить предмет</string>
+    <string name="in_category_text">В категорию</string>
 </resources>

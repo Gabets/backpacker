@@ -31,8 +31,6 @@ public class AddCategoryDialog extends DialogFragment{
                 })
                 .setItems(categoriesArray, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // TO DO
-                        Log.d(App.LOG_TAG, "int which = " + which);
                         if (categoriesArray != null) {
                             ((PrepareListActivity) getActivity()).addCategory(categoriesArray[which]);
                         }

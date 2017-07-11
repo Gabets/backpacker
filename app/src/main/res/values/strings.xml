@@ -122,4 +122,6 @@
         <item>the tablet</item>
     </string-array>
 
+    <string name="add_item_text">Add Item</string>
+    <string name="in_category_text">In Category</string>
 </resources>
