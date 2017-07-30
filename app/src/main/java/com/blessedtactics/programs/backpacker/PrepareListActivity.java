@@ -17,6 +17,7 @@ import com.blessedtactics.programs.backpacker.dialogs.DeleteItemDialog;
 import com.blessedtactics.programs.backpacker.models.Item;
 import com.blessedtactics.programs.backpacker.models.ListItem;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -97,7 +98,6 @@ public class PrepareListActivity extends AppCompatActivity {
         addCategoryDialog.setArguments(bundle);
         addCategoryDialog.show(mFragmentManager, "add category dialog");
     }
-
     public void addCategory(final String categoryName) {
 
         mRealm.executeTransaction(new Realm.Transaction() {
@@ -123,19 +123,61 @@ public class PrepareListActivity extends AppCompatActivity {
     }
 
     public void onClickAddItem(View view) {
-        RealmResults<Item> categories = mRealm.where(Item.class).equalTo("type", "i").findAll().sort("name");
-        String[] categoryNames = new String[categories.size()];
-        for (int i = 0; i < categories.size(); i++) {
-            categoryNames[i] = categories.get(i).getName();
+        ArrayList<String> categoriesList = new ArrayList<>();
+        for (Item item : mItemsList) {
+            if (item.getType().equalsIgnoreCase("c")) {
+                categoriesList.add(item.getName());
+            }
+        }
+        String[] categoriesNames = categoriesList.toArray(new String[categoriesList.size()]);
+
+        RealmResults<Item> items = mRealm.where(Item.class).equalTo("type", "i").findAll().sort("name");
+        String[] itemsNames = new String[items.size()];
+        for (int i = 0; i < items.size(); i++) {
+            itemsNames[i] = items.get(i).getName();
         }
 
         Bundle bundle = new Bundle();
-        bundle.putStringArray("items", categoryNames);
+        bundle.putStringArray("categories", categoriesNames);
+        bundle.putStringArray("items", itemsNames);
 
         AddItemDialog addItemDialog = new AddItemDialog();
         addItemDialog.setArguments(bundle);
         addItemDialog.show(mFragmentManager, "add item dialog");
     }
+    public void addItem(String categoryName, String itemName) {
+        Log.d("add items", "category = " + categoryName);
+        Log.d("add items", "item = " + itemName);
+
+        //1) add item to list
+        for (int i = 0; i < mItemsList.size(); i++) {
+            Item item = mItemsList.get(i);
+            if (item.getType().equalsIgnoreCase("c") &&
+                    item.getName().equalsIgnoreCase(categoryName)) {
+
+                for (int j = i + 1; j < mItemsList.size(); j++) {
+                    item = mItemsList.get(j);
+                    if (item.getType().equalsIgnoreCase("c") || //found next category
+                            item.getName().compareToIgnoreCase(itemName) > 0) {
+                        mItemsList.add(j, new Item(itemName, "i"));
+                        mAdapter.notifyDataSetChanged();
+                        return;
+                    }
+                }
+                //if end of list is reached
+                mItemsList.add(new Item(itemName, "i"));
+                mAdapter.notifyDataSetChanged();
+                return;
+            }
+        }
+
+
+
+
+
+        //2) add item to the ListItem
+    }
+
 
     public void onClickCreateCategory(View view) {
         CreateCategoryDialog createCategoryDialog = new CreateCategoryDialog();

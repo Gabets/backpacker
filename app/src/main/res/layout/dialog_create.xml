@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         style="@style/TitleText"
+        android:labelFor="@+id/etName"
         tools:text="Create text"/>
 
     <EditText
@@ -27,15 +28,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnDCOK"
-            style="@style/SmallButtonTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="@android:string/ok" />
-
-        <Button
             android:id="@+id/btnDCCancel"
             style="@style/SmallButtonTheme"
             android:layout_width="match_parent"
@@ -43,6 +35,15 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/btnDCOK"
+            style="@style/SmallButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@android:string/ok" />
     </LinearLayout>
 
 </LinearLayout>
