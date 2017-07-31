@@ -145,11 +145,20 @@ public class PrepareListActivity extends AppCompatActivity {
         addItemDialog.setArguments(bundle);
         addItemDialog.show(mFragmentManager, "add item dialog");
     }
-    public void addItem(String categoryName, String itemName) {
-        Log.d("add items", "category = " + categoryName);
-        Log.d("add items", "item = " + itemName);
+    public void addItem(final String categoryName, final String itemName) {
 
-        //1) add item to list
+        //add item to the ListItem
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                ListItem toUpdateLI = mRealm.where(ListItem.class).equalTo("category.name", categoryName).findFirst();
+                Item item = mRealm.where(Item.class).equalTo("name", itemName).findFirst();
+                toUpdateLI.getItems().add(item);
+            }
+        });
+
+        //add item to list
         for (int i = 0; i < mItemsList.size(); i++) {
             Item item = mItemsList.get(i);
             if (item.getType().equalsIgnoreCase("c") &&
@@ -170,12 +179,6 @@ public class PrepareListActivity extends AppCompatActivity {
                 return;
             }
         }
-
-
-
-
-
-        //2) add item to the ListItem
     }
 
 
