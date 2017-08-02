@@ -111,7 +111,7 @@
         <item>binoculars</item>
         <item>map</item>
         <item>passport</item>
-        <item>spare_batteries</item>
+        <item>spare batteries</item>
         <item>GPS</item>
         <item>trekking poles</item>
         <item>keys</item>
@@ -124,4 +124,6 @@
 
     <string name="add_item_text">Add Item</string>
     <string name="in_category_text">In Category</string>
+
+    <string name="deselect_text">DESELECT</string>
 </resources>

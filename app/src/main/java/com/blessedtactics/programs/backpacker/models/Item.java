@@ -9,14 +9,16 @@ public class Item  extends RealmObject {
     public Item() {
     }
 
-    public Item(String name, String type) {
+    public Item(String name, String type, boolean packed) {
         this.name = name;
         this.type = type;
+        this.packed = packed;
     }
 
     @Required
     private String name;
     private String type;
+    private boolean packed;
 
     public String getName() {
         return name;
@@ -32,5 +34,13 @@ public class Item  extends RealmObject {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean isPacked() {
+        return packed;
+    }
+
+    public void setPacked(boolean packed) {
+        this.packed = packed;
     }
 }

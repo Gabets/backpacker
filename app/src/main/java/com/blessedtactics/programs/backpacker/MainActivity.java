@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 Item categoryItem = realm.createObject(Item.class);
                 categoryItem.setName(itemsArray[0]);
                 categoryItem.setType("c");
+                categoryItem.setPacked(false);
 
                 listItem.setCategory(categoryItem);
 
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     Item item = realm.createObject(Item.class);
                     item.setName(itemsArray[i]);
                     item.setType("i");
+                    item.setPacked(false);
                     items.add(item);
                 }
                 listItem.setItems(items);

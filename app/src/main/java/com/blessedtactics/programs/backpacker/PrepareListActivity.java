@@ -113,12 +113,12 @@ public class PrepareListActivity extends AppCompatActivity {
             Item item = mItemsList.get(i);
             if (item.getType().equalsIgnoreCase("c")
                     && item.getName().compareToIgnoreCase(categoryName) > 0) {
-                mItemsList.add(i, new Item(categoryName, "c"));
+                mItemsList.add(i, new Item(categoryName, "c", false));
                 mAdapter.notifyDataSetChanged();
                 return;
             }
         }
-        mItemsList.add(new Item(categoryName, "c"));
+        mItemsList.add(new Item(categoryName, "c", false));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -146,13 +146,12 @@ public class PrepareListActivity extends AppCompatActivity {
         addItemDialog.show(mFragmentManager, "add item dialog");
     }
     public void addItem(final String categoryName, final String itemName) {
-
         //add item to the ListItem
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
 
-                ListItem toUpdateLI = mRealm.where(ListItem.class).equalTo("category.name", categoryName).findFirst();
+                ListItem toUpdateLI = mRealm.where(ListItem.class).equalTo(CATEGORY_NAME, categoryName).findFirst();
                 Item item = mRealm.where(Item.class).equalTo("name", itemName).findFirst();
                 toUpdateLI.getItems().add(item);
             }
@@ -168,13 +167,13 @@ public class PrepareListActivity extends AppCompatActivity {
                     item = mItemsList.get(j);
                     if (item.getType().equalsIgnoreCase("c") || //found next category
                             item.getName().compareToIgnoreCase(itemName) > 0) {
-                        mItemsList.add(j, new Item(itemName, "i"));
+                        mItemsList.add(j, new Item(itemName, "i", false));
                         mAdapter.notifyDataSetChanged();
                         return;
                     }
                 }
                 //if end of list is reached
-                mItemsList.add(new Item(itemName, "i"));
+                mItemsList.add(new Item(itemName, "i", false));
                 mAdapter.notifyDataSetChanged();
                 return;
             }
@@ -193,6 +192,7 @@ public class PrepareListActivity extends AppCompatActivity {
                 Item item = mRealm.createObject(Item.class);
                 item.setName(categoryName);
                 item.setType("c");
+                item.setPacked(false);
             }
         });
     }
@@ -208,6 +208,7 @@ public class PrepareListActivity extends AppCompatActivity {
                 Item item = mRealm.createObject(Item.class);
                 item.setName(itemName);
                 item.setType("i");
+                item.setPacked(false);
             }
         });
     }
@@ -223,44 +224,12 @@ public class PrepareListActivity extends AppCompatActivity {
         deleteItemDialog.show(mFragmentManager, "delete item");
     }
 
-    public void deleteFromDB() {
-        mItemsList.remove(mClickedPosition);
-        mAdapter.notifyDataSetChanged();
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                RealmResults<Item> items = mRealm.where(Item.class)
-                        .equalTo("name", mClickedItem.getName())
-                        .equalTo("type", mClickedItem.getType())
-                        .findAll();
-                items.deleteAllFromRealm();
-            }
-        });
-    }
-
     public void deleteFromList() {
 
-        if (mClickedItem.getType().equalsIgnoreCase("c")) {
-            //if it is a category
-            do {
-                mItemsList.remove(mClickedPosition);
-            } while (mClickedPosition < mItemsList.size() &&
-                    !mItemsList.get(mClickedPosition).getType().equalsIgnoreCase("c"));
+        if (mClickedItem.getType().equalsIgnoreCase("i")) { //remove Item
+            mItemsList.remove(mClickedPosition);            //from list
 
-            mRealm.executeTransaction(new Realm.Transaction() {
-                @Override
-                public void execute(Realm realm) {
-                    ListItem listItem =  mRealm.where(ListItem.class)
-                            .equalTo(CATEGORY_NAME, mClickedItem.getName())
-                            .findFirst();
-                    listItem.deleteFromRealm();
-                }
-            });
-
-        } else {
-            //if it is a item
-            mItemsList.remove(mClickedPosition);
-            for (int i = mClickedPosition - 1; i >=0; i--) {
+            for (int i = mClickedPosition - 1; i >=0; i--) {//from List Item in DB
                 final Item category = mItemsList.get(i);
 
                 if (category.getType().equalsIgnoreCase("c")) {
@@ -279,8 +248,43 @@ public class PrepareListActivity extends AppCompatActivity {
                     break;
                 }
             }
+        } else {                                                 //remove List Item
+            Item item;
+            do {                                                //from list
+                mItemsList.remove(mClickedPosition);
+                if (mClickedPosition >= mItemsList.size()) {
+                    break;
+                }
+                item = mItemsList.get(mClickedPosition);
+            } while (item.getType().equalsIgnoreCase("i"));
+
+            mRealm.executeTransaction(new Realm.Transaction() { //from DB
+                @Override
+                public void execute(Realm realm) {
+                    ListItem listItem =  mRealm.where(ListItem.class)
+                            .equalTo(CATEGORY_NAME, mClickedItem.getName())
+                            .findFirst();
+                    listItem.deleteFromRealm();
+                }
+            });
         }
+
         mAdapter.notifyDataSetChanged();
+    }
+
+    public void deleteFromDB() {
+        deleteFromList();
+
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<Item> items = mRealm.where(Item.class)
+                        .equalTo("name", mClickedItem.getName())
+                        .equalTo("type", mClickedItem.getType())
+                        .findAll();
+                items.deleteAllFromRealm();
+            }
+        });
     }
 
     @Override
