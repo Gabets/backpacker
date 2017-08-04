@@ -46,15 +46,22 @@ public class PackActivity extends AppCompatActivity {
                 Item clickedItem = (Item) parent.getItemAtPosition(position);
                 final String itemName = clickedItem.getName();
 
-                mRealm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        Item updateItem = mRealm.where(Item.class).equalTo("name", itemName).findFirst();
-                        updateItem.setPacked(!updateItem.isPacked());
-                    }
-                });
+                RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll();
+                for (ListItem listItem : results) {
+                    for (final Item item : listItem.getItems()) {
+                        if (item.getName().equalsIgnoreCase(itemName)) {
+                            mRealm.executeTransaction(new Realm.Transaction() {
+                                @Override
+                                public void execute(Realm realm) {
+                                    item.setPacked(!item.isPacked());
+                                }
+                            });
+                            mAdapter.notifyDataSetChanged();
+                            return;
+                        }
 
-                mAdapter.notifyDataSetChanged();
+                    }
+                }
             }
         });
 
@@ -84,4 +91,12 @@ public class PackActivity extends AppCompatActivity {
         return fullList;
     }
 
+    public void pnClickDeselect(View view) {
+        RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll();
+        for (ListItem listItem : results) {
+            for (Item item : listItem.getItems()) {
+
+            }
+        }
+    }
 }
