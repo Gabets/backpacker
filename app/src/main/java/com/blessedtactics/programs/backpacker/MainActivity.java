@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     Item item = realm.createObject(Item.class);
                     item.setName(itemsArray[i]);
                     item.setType("i");
+                    item.setInList(true);
                     item.setPacked(false);
                     items.add(item);
                 }
