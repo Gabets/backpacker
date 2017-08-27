@@ -43,25 +43,35 @@ public class PackActivity extends AppCompatActivity {
         lvPack.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item clickedItem = (Item) parent.getItemAtPosition(position);
-                final String itemName = clickedItem.getName();
+                final Item clickedItem = (Item) parent.getItemAtPosition(position);
 
-                RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll();
-                for (ListItem listItem : results) {
-                    for (final Item item : listItem.getItems()) {
-                        if (item.getName().equalsIgnoreCase(itemName)) {
-                            mRealm.executeTransaction(new Realm.Transaction() {
-                                @Override
-                                public void execute(Realm realm) {
-                                    item.setPacked(!item.isPacked());
-                                }
-                            });
-                            mAdapter.notifyDataSetChanged();
-                            return;
-                        }
-
+                mRealm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        clickedItem.setPacked(!clickedItem.isPacked());
                     }
-                }
+                });
+
+                mAdapter.notifyDataSetChanged();
+
+//                final String itemName = clickedItem.getName();
+//
+//                RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll();
+//                for (ListItem listItem : results) {
+//                    for (final Item item : listItem.getItems()) {
+//                        if (item.getName().equalsIgnoreCase(itemName)) {
+//                            mRealm.executeTransaction(new Realm.Transaction() {
+//                                @Override
+//                                public void execute(Realm realm) {
+//                                    item.setPacked(!item.isPacked());
+//                                }
+//                            });
+//                            mAdapter.notifyDataSetChanged();
+//                            return;
+//                        }
+//
+//                    }
+//                }
             }
         });
 
@@ -91,7 +101,7 @@ public class PackActivity extends AppCompatActivity {
         return fullList;
     }
 
-    public void pnClickDeselect(View view) {
+    public void onClickDeselect(View view) {
         RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll();
         for (ListItem listItem : results) {
             for (Item item : listItem.getItems()) {

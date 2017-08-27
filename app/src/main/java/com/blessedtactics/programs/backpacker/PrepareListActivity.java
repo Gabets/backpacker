@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class PrepareListActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class PrepareListActivity extends AppCompatActivity {
 
     private int mClickedPosition;
     private Item mClickedItem;
+    private int mQuantity = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +133,14 @@ public class PrepareListActivity extends AppCompatActivity {
         }
         String[] categoriesNames = categoriesList.toArray(new String[categoriesList.size()]);
 
-        RealmResults<Item> items = mRealm.where(Item.class).equalTo("type", "i").findAll().sort("name");
+        RealmQuery<Item> query = mRealm.where(Item.class);
+        query.equalTo("type", "i");
+
+        RealmResults<Item> items = mRealm.where(Item.class)
+                .equalTo("type", "i")
+                .distinct("name")
+                .sort("name");
+
         String[] itemsNames = new String[items.size()];
         for (int i = 0; i < items.size(); i++) {
             itemsNames[i] = items.get(i).getName();
@@ -146,14 +155,44 @@ public class PrepareListActivity extends AppCompatActivity {
         addItemDialog.show(mFragmentManager, "add item dialog");
     }
     public void addItem(final String categoryName, final String itemName) {
+
+
         //add item to the ListItem
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
 
                 ListItem toUpdateLI = mRealm.where(ListItem.class).equalTo(CATEGORY_NAME, categoryName).findFirst();
-                Item item = mRealm.where(Item.class).equalTo("name", itemName).findFirst();
+
+                RealmResults<Item> results = mRealm.where(Item.class)
+                        .equalTo("name", itemName)
+//                        .equalTo("inList", false)
+                        .findAll();
+
+                for (Item item : results) {
+                    if (mQuantity < item.getQuantity()) {
+                        mQuantity = item.getQuantity();
+                    }
+                }
+
+                for (Item item : results) {
+                    if (!item.isInList()) {
+                        toUpdateLI.getItems().add(item);
+                        item.setInList(true);
+
+                        return;
+                    }
+                }
+
+                mQuantity = mQuantity + 1;
+                Item item = realm.createObject(Item.class);
+                item.setName(itemName);
+                item.setType("i");
+                item.setQuantity(mQuantity);
+
+
                 toUpdateLI.getItems().add(item);
+                item.setInList(true);
             }
         });
 
@@ -167,14 +206,16 @@ public class PrepareListActivity extends AppCompatActivity {
                     item = mItemsList.get(j);
                     if (item.getType().equalsIgnoreCase("c") || //found next category
                             item.getName().compareToIgnoreCase(itemName) > 0) {
-                        mItemsList.add(j, new Item(itemName, "i", false));
+                        mItemsList.add(j, new Item(itemName, "i", false, true, mQuantity));
                         mAdapter.notifyDataSetChanged();
+                        mQuantity = 0;
                         return;
                     }
                 }
                 //if end of list is reached
-                mItemsList.add(new Item(itemName, "i", false));
+                mItemsList.add(new Item(itemName, "i", false, true, mQuantity));
                 mAdapter.notifyDataSetChanged();
+                mQuantity = 0;
                 return;
             }
         }
@@ -192,7 +233,6 @@ public class PrepareListActivity extends AppCompatActivity {
                 Item item = mRealm.createObject(Item.class);
                 item.setName(categoryName);
                 item.setType("c");
-                item.setPacked(false);
             }
         });
     }
@@ -205,16 +245,23 @@ public class PrepareListActivity extends AppCompatActivity {
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
+
+                RealmResults<Item> results = mRealm.where(Item.class).equalTo("name", itemName).findAll();
+
+                if (results.size() != 0) {
+                    return;
+                }
+
                 Item item = mRealm.createObject(Item.class);
                 item.setName(itemName);
                 item.setType("i");
-                item.setPacked(false);
             }
         });
     }
 
     private void onClickListItem() {
-        Log.d(App.LOG_TAG, "onClickListItem item = " + mClickedItem.getName() + " type = " + mClickedItem.getType() );
+        Log.d(App.LOG_TAG, "onClickListItem item = " + mClickedItem.getName()
+                + " quantity = " + mClickedItem.getQuantity());
 
         Bundle bundle = new Bundle();
         bundle.putString("name", mClickedItem.getName());
@@ -233,16 +280,23 @@ public class PrepareListActivity extends AppCompatActivity {
                 final Item category = mItemsList.get(i);
 
                 if (category.getType().equalsIgnoreCase("c")) {
-                    final Item item = mClickedItem;
                     mRealm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
+
+                            Item item = mRealm.where(Item.class)
+                                    .equalTo("name", mClickedItem.getName())
+                                    .equalTo("quantity", mClickedItem.getQuantity())
+                                    .findFirst();
+
+
                             ListItem listItem = mRealm.where(ListItem.class)
                                     .equalTo(CATEGORY_NAME, category.getName())
                                     .findFirst();
                             Log.d(App.LOG_TAG, "category = " + listItem.getCategory().getName());
 
                             listItem.getItems().remove(item);
+                            item.setInList(false);
                         }
                     });
                     break;
@@ -281,6 +335,7 @@ public class PrepareListActivity extends AppCompatActivity {
                 RealmResults<Item> items = mRealm.where(Item.class)
                         .equalTo("name", mClickedItem.getName())
                         .equalTo("type", mClickedItem.getType())
+                        .equalTo("inList", false)
                         .findAll();
                 items.deleteAllFromRealm();
             }
