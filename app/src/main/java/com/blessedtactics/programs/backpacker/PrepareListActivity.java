@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.blessedtactics.programs.backpacker.adapters.PrepareListAdapter;
 import com.blessedtactics.programs.backpacker.dialogs.AddCategoryDialog;
@@ -102,6 +103,13 @@ public class PrepareListActivity extends AppCompatActivity {
     }
     public void addCategory(final String categoryName) {
 
+        for (Item category: mItemsList) {
+            if (category.getName().equalsIgnoreCase(categoryName)) {
+                Toast.makeText(this, getString(R.string.toast_ban_add_double_category_text), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -155,8 +163,6 @@ public class PrepareListActivity extends AppCompatActivity {
         addItemDialog.show(mFragmentManager, "add item dialog");
     }
     public void addItem(final String categoryName, final String itemName) {
-
-
         //add item to the ListItem
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -166,7 +172,6 @@ public class PrepareListActivity extends AppCompatActivity {
 
                 RealmResults<Item> results = mRealm.where(Item.class)
                         .equalTo("name", itemName)
-//                        .equalTo("inList", false)
                         .findAll();
 
                 for (Item item : results) {
@@ -227,6 +232,14 @@ public class PrepareListActivity extends AppCompatActivity {
         createCategoryDialog.show(mFragmentManager, "create category");
     }
     public void createCategory(final String categoryName) {
+        RealmResults<Item> results = mRealm.where(Item.class)
+                .equalTo("name", categoryName)
+                .findAll();
+        if (results.size() != 0) {
+            Toast.makeText(this, getString(R.string.toast_ban_create_double_category_text), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -242,6 +255,15 @@ public class PrepareListActivity extends AppCompatActivity {
         createItemDialog.show(mFragmentManager, "create item");
     }
     public void createItem(final String itemName) {
+
+        RealmResults<Item> results = mRealm.where(Item.class)
+                .equalTo("name", itemName)
+                .findAll();
+        if (results.size() != 0) {
+            Toast.makeText(this, getString(R.string.toast_ban_create_double_item_text), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
