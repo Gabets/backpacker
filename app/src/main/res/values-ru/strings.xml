@@ -126,7 +126,7 @@
     <string name="add_item_text">Добавить предмет</string>
     <string name="in_category_text">В категорию</string>
 
-    <string name="deselect_text">Отменить выделение</string>
+    <string name="deselect_text">Снять отметки</string>
 
     <string name="toast_ban_create_double_item_text">У Вас уже есть предмет с таким названием!</string>
     <string name="toast_ban_create_double_category_text">У Вас уже есть категория с таким названием!</string>

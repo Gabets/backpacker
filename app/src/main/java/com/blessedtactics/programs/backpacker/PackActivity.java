@@ -2,6 +2,7 @@ package com.blessedtactics.programs.backpacker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -45,6 +46,13 @@ public class PackActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Item clickedItem = (Item) parent.getItemAtPosition(position);
 
+                Log.d("Pack onItemClick", "position = " + position);
+
+                if (clickedItem.getType().equalsIgnoreCase("c")) {
+                    return;
+                }
+
+
                 mRealm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
@@ -53,6 +61,30 @@ public class PackActivity extends AppCompatActivity {
                 });
 
                 mAdapter.notifyDataSetChanged();
+
+                for (int i = position; i >=0; i --) {
+                    if (mItemsList.get(i).getType().equalsIgnoreCase("c")) {
+                        Log.d("Pack onItemClick", mItemsList.get(i).getName());
+
+                        String categoryName = mItemsList.get(i).getName();
+
+                        final ListItem listItem= mRealm.where(ListItem.class).equalTo(CATEGORY_NAME, categoryName).findFirst();
+                        for (Item item: listItem.getItems()) {
+                            if (!item.isPacked()) {
+                                return;
+                            }
+                            mRealm.executeTransaction(new Realm.Transaction() {
+                                @Override
+                                public void execute(Realm realm) {
+                                    listItem.getCategory().setPacked(true);
+                                }
+                            });
+                            mAdapter.notifyDataSetChanged();
+                        }
+
+                        break;
+                    }
+                }
 
 //                final String itemName = clickedItem.getName();
 //
@@ -102,11 +134,21 @@ public class PackActivity extends AppCompatActivity {
     }
 
     public void onClickDeselect(View view) {
-        RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll();
-        for (ListItem listItem : results) {
-            for (Item item : listItem.getItems()) {
 
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<ListItem> results =  mRealm.where(ListItem.class).findAll();
+                for (ListItem listItem : results) {
+                    for (Item item : listItem.getItems()) {
+                        if (item.isPacked()) {
+                            item.setPacked(false);
+                        }
+                    }
+                }
             }
-        }
+        });
+
+        mAdapter.notifyDataSetChanged();
     }
 }

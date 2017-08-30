@@ -319,6 +319,7 @@ public class PrepareListActivity extends AppCompatActivity {
 
                             listItem.getItems().remove(item);
                             item.setInList(false);
+                            item.setPacked(false);
                         }
                     });
                     break;

@@ -125,7 +125,7 @@
     <string name="add_item_text">Add Item</string>
     <string name="in_category_text">In Category</string>
 
-    <string name="deselect_text">DESELECT</string>
+    <string name="deselect_text">DESELECT ALL</string>
     
     <string name="toast_ban_create_double_item_text">You already have an item with that name!</string>
     <string name="toast_ban_create_double_category_text">You already have an category with that name!</string>
